@@ -31,5 +31,5 @@ while question "OJITO" "Seguro que quiere borrar $arg?"
 do
 info "Pero seguro?"
 done
-info "Ah, bueno"
+info "Ah!, bueno"
 done
