@@ -7,9 +7,9 @@ Luego de ser agregado como colaborador podrá realizar cambios sobre los archivo
 
 Para trabajar sin mayores dolores de cabeza cada alumno deberá crear un directorio con su nombre de usuario, y sólo deberá subir cambios a los archivos en su directorio. 
 
-#Secuencia incial para lograr un directorio (asumiendo que git ya está instalado):
+##Secuencia incial para lograr un directorio (asumiendo que git ya está instalado):
 
-$ git clone https://github.com/niniadcobre/asa2016.git (este paso se hace por única vez)
+$ git clone https://github.com/niniadcobre/asa2016.git (este paso se hace por única vez) <br>
 $ cd asa2016
 $ mkdir minombredeusuario
 $ echo "archivo de prueba" > minombredeusuario/test.txt
