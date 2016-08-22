@@ -16,6 +16,6 @@ tam=$2
 
 for ((i=0;i < $cant;i++));do 
     disco=disco$RANDOM 
-    dd if=/dev/zero of=$disco bs=1M count=$tam  >/dev/null
+    dd if=/dev/zero of=$disco bs=1M count=$tam >/dev/null  2>&1 
     losetup --find --show $disco
 done 
