@@ -10,7 +10,7 @@ which pdfunite 2>&1
 fi
 
 # descarga
-#wget --mirror http://pages.cs.wisc.edu/~remzi/OSTEP/
+wget --mirror http://pages.cs.wisc.edu/~remzi/OSTEP/
 
 # yellow pages 
 cat index.html | grep yellow | cut -d "=" -f3 | sed 's/style//g' >> mirror.tmp
