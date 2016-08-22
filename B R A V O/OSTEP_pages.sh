@@ -1,5 +1,5 @@
 #! /bin/bash
-
+#
 # check bin
 which pdfunite 2>&1
  if [[ "$?" != "0" ]]; then
