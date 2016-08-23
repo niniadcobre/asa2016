@@ -1,0 +1,55 @@
+#############################
+# ASA - 2016 - Almacenamiento
+#############################
+
+0) Reproducir en una terminal paso a paso la secuencia de comandos presentada
+en el apunte de cátedra para Loop devices (página 15). 
+
+1) Crear un script que genere n archivos de un tamaño fijo, y los asocie a 
+loop devices. El número de archivos y su tamaño deben recibirse como argumento
+de entrada. 
+
+--> Debería verificar al menos que exista el espacio previo a crear, o bien 
+    puedo dejar que llene y controlar si hubo error al crear. 
+--> Debería verificar que el usuario es root 
+
+2) Crear en una tabla de particiones tipo MBR (IBM PC) sobre un dispositivo 
+loop. Copiar la tabla de particiones a un archivo, destruir la tabla anterior
+y restaurarla. Escriba el procedimiento paso a paso. Observe el cambio del 
+contenido del dispositivo antes y después (hexdump) 
+
+3) Crear una tabla de particiones tipo GPT. Destruir la tabla principal y 
+restaurarla del backup que la misma establece.  
+
+---> La tabla GPT es más compleja de manipular, entre otras cosas posee 
+     bits de paridad para detectar errores y no se encuentra solo al ppio del 
+     disco sino que existe una copia al final del mismo. Usamos siempre las 
+     herramientas que conocen la estructura y saben como manipularla. 
+
+4) Discuta ¿Qué relación existe entre GPT/UEFI - MBR/BIOS? ¿Diferencias?
+
+----> Es preciso conocer estos temas porque hacen al proceso de arranque de 
+      la máquina. Hardware diferentes a los que utilizamos habitualmente 
+      siguen la misma lógica: firmware, particiones, gestores de arranque, 
+      kernel, etc. 
+
+5) Utilice un loopdevice para visualizar el contenido de usa ISO. ¿Cómo 
+modificaría el fstab para lograr que esta ISO se monte automáticamente en 
+cada booteo?
+
+6) Crear un archivo de 100Mb utilizando fallocate y dd, tome el tiempo de ambos y compare. 
+
+----> No se les ocurra sacar el reloj, o usar el temporizador del celu. :D
+
+7) Crear un archivo disperso (sparse file). Observe el tamaño reportado por ls 
+y por du. ¿Qué sucede al realizar una copia de dicho archivo? Observe la
+opción --apparent-size de du.
+
+8) ¿Es posible crear un archivo disperso mayor al espacio libre en el sistema
+de archivos?
+
+9) ¿Es posible crear un archivo disperso mayor al tamaño total del sistema de 
+archivos?
+
+10) Desarrolle un script que ubique potenciales archivos dispersos en un directorio. 
+
