@@ -17,5 +17,12 @@ tam=$2
 for ((i=0;i < $cant;i++));do 
     disco=disco$RANDOM 
     dd if=/dev/zero of=$disco bs=1M count=$tam >/dev/null  2>&1 
-    losetup --find --show $disco
+    dev=`losetup --find --show $disco`
+
+    #particionando el dispositivo
+    parted -s $dev  mklabel gpt 
+    parted -s $dev  mkpart  P1 ext3 100%
 done 
+
+
+
