@@ -22,4 +22,8 @@ for ((i=0;i < $cant;i++));do
     #particionando el dispositivo
     parted -s $dev  mklabel gpt 
     parted -s $dev  mkpart  P1 ext3 0 100% set 1 raid on >/dev/null 2>&1
+ 
+    printf "Dispositivo $dev creado y particionado\n"
 done 
+
+
