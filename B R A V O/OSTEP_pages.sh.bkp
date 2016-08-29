@@ -1,0 +1,65 @@
+#! /bin/bash
+
+# check bin
+which pdfunite 2>&1
+ if [[ "$?" != "0" ]]; then
+	echo -e '\033[33;7m Usted no tiene instalado pdfunite para convertir los pdfs a un solo. Si no lo instala no podrá ser satisfactorio el script \033[m'
+	echo Direccionando al link de descarga ...
+	firefox http://www.linuxfromscratch.org/blfs/view/svn/general/poppler.html &
+	exit 1
+fi
+
+# descarga
+printf "~~> Descargando, aguarde ... \n"
+wget --mirror http://pages.cs.wisc.edu/~remzi/OSTEP/ 1>& /dev/null 
+
+# acá y dónde
+PWD=`pwd`
+DIR="/pages.cs.wisc.edu/~remzi/OSTEP/"
+
+# yellow pages 
+cat ${PWD}${DIR}index.html | grep yellow | cut -d "=" -f3 | sed 's/style//g' >> mirror.tmp
+
+# orange pages 
+grep f88017 < ${PWD}${DIR}index.html | grep '<small>[01-99]\{1,3\}</small>' | cut -d ">" -f3,4,5 | sort -n | cut -d "=" -f2 | sed 's/style//g' >> mirror.tmp
+
+# blue pages 
+grep 00aacc < ${PWD}${DIR}index.html | grep '<small>[01-99]\{1,3\}</small>' | cut -d ">" -f3,4,5 | sort -n | cut -d "=" -f2 | sed 's/style//g' >> mirror.tmp
+
+# green pages 
+grep 4CC417 < ${PWD}${DIR}index.html | cut -d "=" -f3 | sed 's/style//g' >> mirror.tmp
+
+# aqua pages
+grep 3EA99F < ${PWD}${DIR}index.html | cut -d "=" -f3 | sed 's/style//g' >> mirror.tmp
+
+# ordenando
+MIRROR=`sed -e '/^$/d' -e "s,^,${PWD}${DIR}," < mirror.tmp | tr -d "\n"`
+
+# construyendo el pdf
+printf "~~> procesando el pdf, aguarde...\n"
+pdfunite ${MIRROR} OSTEP.pdf
+
+# limpieza
+rm -r pages.cs.wisc.edu
+rm mirror.tmp
+
+# execute PDF & end script
+PDF=`cat /etc/gnome/defaults.list | grep pdf | cut -d "=" -f2 | cut -d "." -f1`
+printf "~~> Abriendo el pdf\n"
+
+# sentencia if para lograr dar con un lector pdf
+ if [[ "$PDF" == "" ]] ; then
+	echo entrando mal
+	which acroread; which evince; which atril 2>&1
+	if [[ "$?" == "0" ]] ; then
+		PLAN=`which acroread; which evince; which atril | cut -d "/" -f4`
+		echo $PLAN
+		${PLAN} OSTEP.pdf &
+	else
+		echo -e '\033[33;7m @ERROR: No tiene un lector de pdf \033[m'
+        	exit 0
+	fi
+ else
+	${PDF} OSTEP.pdf &
+ fi
+
