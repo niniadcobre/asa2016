@@ -6,7 +6,7 @@ if [[ `id -u` -ne 0 ]];then
 fi 
 
 if [[ $# -ne 2 ]];then 
-	printf "Formato: $0 <cant dispositivos> <Tamaño en MiB>"
+	printf "Formato: $0 <cant dispositivos> <Tamaño en MiB>\n"
 	exit 1
 fi
 
