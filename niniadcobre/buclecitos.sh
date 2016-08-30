@@ -4,7 +4,7 @@
 # creo particiones msdos
 function particiono {
     parted -s $Dev mklabel $TipoLabel
-    parted -s $Dev mkpart primary $Tipo 0 100% set 1 raid on >/dev/null  2>&1 
+    parted -s $Dev mkpart primary $TipoFS 0 100% set 1 raid on >/dev/null  2>&1 
 }
 
 # Verifico si soy Root
@@ -33,12 +33,12 @@ case $TipoLabel in
    *)  echo "No reconosco el tipo $TipoLabel!!"; exit 1;;
 esac 
 
-printf "Sistema de archivo (ext2, ext3, ext4): \n"; read Tipo
-case $Tipo in
+printf "Sistema de archivo (ext2, ext3, ext4): \n"; read TipoFS
+case $TipoFS in
    ext2|EXT2)  Tipo=ext2;;
    ext3|EXT3)  Tipo=ext3;;
    ext4|EXT4)  Tipo=ext4;;
-   *)  echo "No reconosco el tipo $Tipo!!"; exit 1;;
+   *)  echo "No reconosco el tipo $TipoFS!!"; exit 1;;
 esac
 #
 # Inicio la creación de los loopdevice!!
