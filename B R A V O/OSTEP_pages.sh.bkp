@@ -18,7 +18,7 @@ PWD=`pwd`
 DIR="/pages.cs.wisc.edu/~remzi/OSTEP/"
 
 # yellow pages 
-cat ${PWD}${DIR}index.html | grep yellow | cut -d "=" -f3 | sed 's/style//g' >> mirror.tmp
+grep yellow < ${PWD}${DIR}index.html | cut -d "=" -f3 | sed 's/style//g' >> mirror.tmp
 
 # orange pages 
 grep f88017 < ${PWD}${DIR}index.html | grep '<small>[01-99]\{1,3\}</small>' | cut -d ">" -f3,4,5 | sort -n | cut -d "=" -f2 | sed 's/style//g' >> mirror.tmp
@@ -44,7 +44,7 @@ rm -r pages.cs.wisc.edu
 rm mirror.tmp
 
 # execute PDF & end script
-PDF=`cat /etc/gnome/defaults.list | grep pdf | cut -d "=" -f2 | cut -d "." -f1`
+PDF=`grep pdf < /etc/gnome/defaults.list | cut -d "=" -f2 | cut -d "." -f1`
 printf "~~> Abriendo el pdf\n"
 
 # sentencia if para lograr dar con un lector pdf
