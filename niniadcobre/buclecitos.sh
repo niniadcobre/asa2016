@@ -35,9 +35,9 @@ esac
 
 printf "Sistema de archivo (ext2, ext3, ext4): \n"; read TipoFS
 case $TipoFS in
-   ext2|EXT2)  Tipo=ext2;;
-   ext3|EXT3)  Tipo=ext3;;
-   ext4|EXT4)  Tipo=ext4;;
+   ext2|EXT2)  TipoFS=ext2;;
+   ext3|EXT3)  TipoFS=ext3;;
+   ext4|EXT4)  TipoFS=ext4;;
    *)  echo "No reconosco el tipo $TipoFS!!"; exit 1;;
 esac
 #
